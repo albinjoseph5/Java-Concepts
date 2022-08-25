@@ -15,9 +15,32 @@ public class MyAccountPage extends TestBase {
 	@FindBy(css = "#account-account>ul>li:first-of-type>a>i")
 	private WebElement homeBtn;
 
+	@FindBy(css = "#content h2")
+	private WebElement myaccountText;
+
+	@FindBy(css = "#content>ul:first-of-type>li:nth-of-type(2)>a")
+	private WebElement changePasswordBtn;
+
+	@FindBy(css = "#account-account>div:first-of-type")
+	private WebElement successMessage;
+
 	public YourStorePage clickHomeBtn() {
 		homeBtn.click();
 		return new YourStorePage();
+	}
+
+	public String getTextFromMyAccount() {
+		return myaccountText.getText();
+	}
+
+	public ChangePasswordPage clickChangePasswordBtn() {
+		changePasswordBtn.click();
+		return new ChangePasswordPage();
+
+	}
+
+	public String successMessageForPasswordChange() {
+		return successMessage.getText();
 	}
 
 }

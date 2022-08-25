@@ -7,17 +7,12 @@ import org.testng.annotations.Test;
 
 import com.naveenautomation.Base.TestBase;
 import com.naveenautomation.Pages.AccountLoginPage;
-import com.naveenautomation.Pages.CheckoutPage;
 import com.naveenautomation.Pages.MyAccountPage;
-import com.naveenautomation.Pages.YourOrderHasBeenPlacedPage;
 import com.naveenautomation.Pages.YourStorePage;
 
-public class YourOrderHasBeenPlacedTest extends TestBase {
-
+public class AccountLoginTest extends TestBase {
 	YourStorePage yp;
 	AccountLoginPage accountLogin;
-	MyAccountPage map;
-	CheckoutPage checkout;
 
 	@BeforeMethod
 	public void startBorwserSession() {
@@ -25,16 +20,12 @@ public class YourOrderHasBeenPlacedTest extends TestBase {
 		yp = new YourStorePage();
 		yp.clickMyAccountBtn();
 		accountLogin = yp.clickloginBtn();
-		map = accountLogin.login("user13@gmail.com", "Qwerty123");
-		yp = map.clickHomeBtn();
-		checkout = yp.clickOnCheckOutBtn();
 	}
 
 	@Test
-	public void verifyCheckout() {
-		YourOrderHasBeenPlacedPage orderPlaced = checkout.clickOnConfirmBtn();
-		Assert.assertEquals(orderPlaced.successMessageDisplayed(), "Your order has been placed!",
-				"Success message doesnot match");
+	public void verifyCustomerLogin() {
+		MyAccountPage map = accountLogin.login("user11@gmail.com", "Qwerty123");
+		Assert.assertEquals(map.getTextFromMyAccount(), "My Account", "Title doesnot Match");
 	}
 
 	@AfterMethod

@@ -7,17 +7,15 @@ import org.testng.annotations.Test;
 
 import com.naveenautomation.Base.TestBase;
 import com.naveenautomation.Pages.AccountLoginPage;
-import com.naveenautomation.Pages.CheckoutPage;
+import com.naveenautomation.Pages.ChangePasswordPage;
 import com.naveenautomation.Pages.MyAccountPage;
-import com.naveenautomation.Pages.YourOrderHasBeenPlacedPage;
 import com.naveenautomation.Pages.YourStorePage;
 
-public class YourOrderHasBeenPlacedTest extends TestBase {
-
+public class ChangePasswordTest extends TestBase {
 	YourStorePage yp;
 	AccountLoginPage accountLogin;
 	MyAccountPage map;
-	CheckoutPage checkout;
+	ChangePasswordPage cpp;
 
 	@BeforeMethod
 	public void startBorwserSession() {
@@ -25,16 +23,16 @@ public class YourOrderHasBeenPlacedTest extends TestBase {
 		yp = new YourStorePage();
 		yp.clickMyAccountBtn();
 		accountLogin = yp.clickloginBtn();
-		map = accountLogin.login("user13@gmail.com", "Qwerty123");
-		yp = map.clickHomeBtn();
-		checkout = yp.clickOnCheckOutBtn();
+		map = accountLogin.login("user1@gmail.com", "Qwerty1234");
+		cpp = map.clickChangePasswordBtn();
+
 	}
 
 	@Test
-	public void verifyCheckout() {
-		YourOrderHasBeenPlacedPage orderPlaced = checkout.clickOnConfirmBtn();
-		Assert.assertEquals(orderPlaced.successMessageDisplayed(), "Your order has been placed!",
-				"Success message doesnot match");
+	public void verifyChangePassword() {
+		map = cpp.clichContinueBtn("Qwerty12345", "Qwerty12345");
+		Assert.assertEquals(map.successMessageForPasswordChange(),
+				"Success: Your password has been successfully updated.");
 	}
 
 	@AfterMethod

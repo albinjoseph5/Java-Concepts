@@ -6,14 +6,26 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeClass;
+
+import com.naveenautomation.Utils.Utils;
+import com.naveenautomation.Utils.WebDriverEvents;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TestBase {
 	public static WebDriver webDriver;
 	public Properties prop;
+	public static Logger logger;
+	public static EventFiringWebDriver e_driver;
+	public static WebDriverEvents events;
 	public static WebDriverWait wait;
 
 	public TestBase() {
@@ -34,7 +46,18 @@ public class TestBase {
 		}
 	}
 
+	@BeforeClass
+	public void loggerSetup() {
+		logger = Logger.getLogger(TestBase.class);
+		PropertyConfigurator.configure("log4j.properties");
+		BasicConfigurator.configure();
+
+		logger.setLevel(Level.INFO);
+
+	}
+
 	public void intialization() {
+
 		// Manages the driver for the browser on which testing is performed
 
 		String browserName = prop.getProperty("browser");
@@ -56,12 +79,17 @@ public class TestBase {
 			break;
 		}
 
+		e_driver = new EventFiringWebDriver(webDriver);
+		events = new WebDriverEvents();
+		e_driver.register(events);
+		webDriver = e_driver;
+
 		webDriver.manage().window().maximize();
 		webDriver.get(prop.getProperty("base_url"));
 		webDriver.manage().deleteAllCookies();
-		webDriver.manage().timeouts().pageLoadTimeout(Long.valueOf(prop.getProperty("base_time")), TimeUnit.SECONDS);
-		webDriver.manage().timeouts().implicitlyWait(Long.valueOf(prop.getProperty("base_time")), TimeUnit.SECONDS);
-		wait = new WebDriverWait(webDriver, 20);
+		webDriver.manage().timeouts().pageLoadTimeout((Utils.PAGE_LOAD_WAIT), TimeUnit.SECONDS);
+		webDriver.manage().timeouts().implicitlyWait((Utils.IMPLICIT_WAIT), TimeUnit.SECONDS);
+		wait = new WebDriverWait(webDriver, Utils.EXPLICIT_WAIT);
 	}
 
 	public void quitBrowser() {
