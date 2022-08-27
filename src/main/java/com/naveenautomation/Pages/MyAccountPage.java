@@ -21,6 +21,9 @@ public class MyAccountPage extends TestBase {
 	@FindBy(css = "#content>ul:first-of-type>li:nth-of-type(2)>a")
 	private WebElement changePasswordBtn;
 
+	@FindBy(css = "#content>ul:nth-of-type(2)>li:first-of-type>a")
+	private WebElement viewMyOrderHistoryBtn;
+
 	@FindBy(css = "#account-account>div:first-of-type")
 	private WebElement successMessage;
 
@@ -41,6 +44,12 @@ public class MyAccountPage extends TestBase {
 
 	public String successMessageForPasswordChange() {
 		return successMessage.getText();
+	}
+
+	public OrderHistoryPage clickViewMyOrderHistoryBtn() {
+		viewMyOrderHistoryBtn.click();
+		return new OrderHistoryPage();
+
 	}
 
 }

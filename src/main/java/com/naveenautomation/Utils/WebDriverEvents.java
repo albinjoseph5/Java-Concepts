@@ -72,19 +72,19 @@ public class WebDriverEvents extends TestBase implements WebDriverEventListener 
 
 	@Override
 	public void beforeNavigateRefresh(WebDriver driver) {
-		logger.info("Refreshing" + driver.getCurrentUrl());
+		logger.info("Refreshing " + driver.getCurrentUrl());
 
 	}
 
 	@Override
 	public void afterNavigateRefresh(WebDriver driver) {
-		logger.info("Refreshed" + driver.getCurrentUrl());
+		logger.info("Refreshed " + driver.getCurrentUrl());
 
 	}
 
 	@Override
 	public void beforeFindBy(By by, WebElement element, WebDriver driver) {
-		logger.info("Finding Webelement" + element);
+		logger.info("Finding Webelement " + element);
 
 	}
 

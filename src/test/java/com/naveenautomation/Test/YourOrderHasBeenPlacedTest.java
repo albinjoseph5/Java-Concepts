@@ -14,24 +14,25 @@ import com.naveenautomation.Pages.YourStorePage;
 
 public class YourOrderHasBeenPlacedTest extends TestBase {
 
-	YourStorePage yp;
+	YourStorePage yourStorePage;
 	AccountLoginPage accountLogin;
-	MyAccountPage map;
+	MyAccountPage myAccountPage;
 	CheckoutPage checkout;
 
 	@BeforeMethod
 	public void startBorwserSession() {
 		intialization();
-		yp = new YourStorePage();
-		yp.clickMyAccountBtn();
-		accountLogin = yp.clickloginBtn();
-		map = accountLogin.login("user13@gmail.com", "Qwerty123");
-		yp = map.clickHomeBtn();
-		checkout = yp.clickOnCheckOutBtn();
+		yourStorePage = new YourStorePage();
+
 	}
 
 	@Test
 	public void verifyCheckout() {
+		yourStorePage.clickMyAccountBtn();
+		accountLogin = yourStorePage.clickloginBtn();
+		myAccountPage = accountLogin.login("user13@gmail.com", "Qwerty123");
+		yourStorePage = myAccountPage.clickHomeBtn();
+		checkout = yourStorePage.clickOnCheckOutBtn();
 		YourOrderHasBeenPlacedPage orderPlaced = checkout.clickOnConfirmBtn();
 		Assert.assertEquals(orderPlaced.successMessageDisplayed(), "Your order has been placed!",
 				"Success message doesnot match");

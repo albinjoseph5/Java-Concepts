@@ -21,15 +21,15 @@ public class ChangePasswordTest extends TestBase {
 	public void startBorwserSession() {
 		intialization();
 		yp = new YourStorePage();
-		yp.clickMyAccountBtn();
-		accountLogin = yp.clickloginBtn();
-		map = accountLogin.login("user1@gmail.com", "Qwerty1234");
-		cpp = map.clickChangePasswordBtn();
 
 	}
 
 	@Test
 	public void verifyChangePassword() {
+		yp.clickMyAccountBtn();
+		accountLogin = yp.clickloginBtn();
+		map = accountLogin.login("user1@gmail.com", "Qwerty12345");
+		cpp = map.clickChangePasswordBtn();
 		map = cpp.clichContinueBtn("Qwerty12345", "Qwerty12345");
 		Assert.assertEquals(map.successMessageForPasswordChange(),
 				"Success: Your password has been successfully updated.");
