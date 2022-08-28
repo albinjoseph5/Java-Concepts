@@ -10,8 +10,10 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeClass;
 
@@ -27,6 +29,7 @@ public class TestBase {
 	public static EventFiringWebDriver e_driver;
 	public static WebDriverEvents events;
 	public static WebDriverWait wait;
+	public static JavascriptExecutor jse;
 
 	public TestBase() {
 		prop = new Properties();
@@ -90,6 +93,22 @@ public class TestBase {
 		webDriver.manage().timeouts().pageLoadTimeout((Utils.PAGE_LOAD_WAIT), TimeUnit.SECONDS);
 		webDriver.manage().timeouts().implicitlyWait((Utils.IMPLICIT_WAIT), TimeUnit.SECONDS);
 		wait = new WebDriverWait(webDriver, Utils.EXPLICIT_WAIT);
+	}
+
+	public void waitForDocumentCompleteState(int timeOutInSeconds) {
+		new WebDriverWait(webDriver, timeOutInSeconds).until((ExpectedCondition<Boolean>) v -> {
+			logger.info("Verifying page has loaded......");
+			jse = (JavascriptExecutor) webDriver;
+			String documentIsReady = jse.executeScript("return document.readyState").toString();
+			while (true) {
+				if (documentIsReady.equalsIgnoreCase("complete")) {
+					logger.info("Page has loaded completely......");
+					return true;
+				} else {
+					return false;
+				}
+			}
+		});
 	}
 
 	public void quitBrowser() {

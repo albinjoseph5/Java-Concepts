@@ -5,9 +5,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.naveenautomation.Base.TestBase;
+import com.naveenautomation.Utils.Utils;
 
 public class AccountLoginPage extends TestBase {
 	public AccountLoginPage() {
+		waitForDocumentCompleteState(10);
 		PageFactory.initElements(webDriver, this);
 	}
 
@@ -21,15 +23,15 @@ public class AccountLoginPage extends TestBase {
 	private WebElement submitBtn;
 
 	public void enterEmail(String email) {
-		inputEmailField.sendKeys(email);
+		Utils.sendKeys(inputEmailField, email);
 	}
 
 	public void enterPassword(String password) {
-		enterPasswordField.sendKeys(password);
+		Utils.sendKeys(enterPasswordField, password);
 	}
 
 	public MyAccountPage clickSubmitBtn() {
-		submitBtn.submit();
+		Utils.submit(submitBtn);
 		return new MyAccountPage();
 	}
 

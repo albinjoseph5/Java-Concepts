@@ -5,10 +5,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.naveenautomation.Base.TestBase;
+import com.naveenautomation.Utils.Utils;
 
 public class MyAccountPage extends TestBase {
 
 	public MyAccountPage() {
+		waitForDocumentCompleteState(10);
 		PageFactory.initElements(webDriver, this);
 	}
 
@@ -28,16 +30,16 @@ public class MyAccountPage extends TestBase {
 	private WebElement successMessage;
 
 	public YourStorePage clickHomeBtn() {
-		homeBtn.click();
+		Utils.click(homeBtn);
 		return new YourStorePage();
 	}
 
 	public String getTextFromMyAccount() {
-		return myaccountText.getText();
+		return Utils.getText(myaccountText);
 	}
 
 	public ChangePasswordPage clickChangePasswordBtn() {
-		changePasswordBtn.click();
+		Utils.click(changePasswordBtn);
 		return new ChangePasswordPage();
 
 	}

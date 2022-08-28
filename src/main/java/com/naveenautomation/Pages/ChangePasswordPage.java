@@ -5,10 +5,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.naveenautomation.Base.TestBase;
+import com.naveenautomation.Utils.Utils;
 
 public class ChangePasswordPage extends TestBase {
 
 	public ChangePasswordPage() {
+		waitForDocumentCompleteState(10);
 		PageFactory.initElements(webDriver, this);
 	}
 
@@ -22,17 +24,17 @@ public class ChangePasswordPage extends TestBase {
 	private WebElement continueBtn;
 
 	public void enterNewPassword(String newPass) {
-		newPassword.sendKeys(newPass);
+		Utils.sendKeys(newPassword, newPass);
 	}
 
 	public void enterConfirmPassword(String confirmPass) {
-		confirmPassword.sendKeys(confirmPass);
+		Utils.sendKeys(confirmPassword, confirmPass);
 	}
 
 	public MyAccountPage clichContinueBtn(String newPass, String confirmPass) {
 		enterNewPassword(newPass);
 		enterConfirmPassword(confirmPass);
-		continueBtn.click();
+		Utils.click(continueBtn);
 		return new MyAccountPage();
 	}
 }
