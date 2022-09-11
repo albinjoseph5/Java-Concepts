@@ -32,7 +32,7 @@ public class OrderHistoryTest extends TestBase {
 		myAccountPage = accountLogin.login("user13@gmail.com", "Qwerty123");
 		orderHistoryPage = myAccountPage.clickViewMyOrderHistoryBtn();
 		Assert.assertEquals(orderHistoryPage.getTextfromLastDate("#1410", Table_example.DATE_ADDED), "25/08/2022",
-				"Total doesn't match");
+				"Total is not matching");
 		Assert.assertEquals(orderHistoryPage.getTextfromLastTotal("#1410", Table_example.TOTAL), "$1,458.40",
 				"Total is not matching");
 
