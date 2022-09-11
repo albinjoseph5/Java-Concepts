@@ -34,7 +34,7 @@ public class OrderHistoryTest extends TestBase {
 		Assert.assertEquals(orderHistoryPage.getTextfromLastDate("#1410", Table_example.DATE_ADDED), "25/08/2022",
 				"Total doesn't match");
 		Assert.assertEquals(orderHistoryPage.getTextfromLastTotal("#1410", Table_example.TOTAL), "$1,458.40",
-				"Total doesn't match");
+				"Total is not matching");
 
 	}
 
