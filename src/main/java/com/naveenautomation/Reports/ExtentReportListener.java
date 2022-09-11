@@ -42,7 +42,6 @@ public class ExtentReportListener extends TestListenerAdapter {
 		htmlReporter.config().setDocumentTitle("Naveen Automation Application Testing");
 		htmlReporter.config().setReportName("Regression Suite");
 		htmlReporter.config().setTestViewChartLocation(ChartLocation.TOP);
-		htmlReporter.config().setTheme(Theme.DARK);
 
 	}
 

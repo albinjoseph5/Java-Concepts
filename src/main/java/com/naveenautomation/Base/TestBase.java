@@ -3,6 +3,7 @@ package com.naveenautomation.Base;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -30,6 +31,7 @@ public class TestBase {
 	public static WebDriverEvents events;
 	public static WebDriverWait wait;
 	public static JavascriptExecutor jse;
+	private static final int DEFAULT_TIME_TO_WAIT_FOR_PAGE = 50;
 
 	public TestBase() {
 		prop = new Properties();
@@ -90,25 +92,27 @@ public class TestBase {
 		webDriver.manage().window().maximize();
 		webDriver.get(prop.getProperty("base_url"));
 		webDriver.manage().deleteAllCookies();
-		webDriver.manage().timeouts().pageLoadTimeout((Utils.PAGE_LOAD_WAIT), TimeUnit.SECONDS);
-		webDriver.manage().timeouts().implicitlyWait((Utils.IMPLICIT_WAIT), TimeUnit.SECONDS);
-		wait = new WebDriverWait(webDriver, Utils.EXPLICIT_WAIT);
+//		webDriver.manage().timeouts().pageLoadTimeout((Utils.PAGE_LOAD_WAIT), TimeUnit.SECONDS);
+//		webDriver.manage().timeouts().implicitlyWait((Utils.IMPLICIT_WAIT), TimeUnit.SECONDS);
+		wait = new WebDriverWait(webDriver, 15);
 	}
 
 	public void waitForDocumentCompleteState(int timeOutInSeconds) {
-		new WebDriverWait(webDriver, timeOutInSeconds).until((ExpectedCondition<Boolean>) v -> {
-			logger.info("Verifying page has loaded......");
-			jse = (JavascriptExecutor) webDriver;
-			String documentIsReady = jse.executeScript("return document.readyState").toString();
-			while (true) {
-				if (documentIsReady.equalsIgnoreCase("complete")) {
-					logger.info("Page has loaded completely......");
-					return true;
-				} else {
-					return false;
-				}
-			}
-		});
+//		new WebDriverWait(webDriver, Duration.ofSeconds(timeOutInSeconds)).until((ExpectedCondition<Boolean>) v -> {
+//			logger.info("Verifying page has loaded......");
+//			jse = (JavascriptExecutor) webDriver;
+//			String documentIsReady = jse.executeScript("return document.readyState").toString();
+//			while (true) {
+//				if (documentIsReady.equalsIgnoreCase("complete")) {
+//					logger.info("Page has loaded completely......");
+//					return true;
+//				} else {
+//					return false;
+//				}
+//			}
+//		});
+		webDriver.manage().timeouts().implicitlyWait(DEFAULT_TIME_TO_WAIT_FOR_PAGE, TimeUnit.SECONDS);
+
 	}
 
 	public void quitBrowser() {
