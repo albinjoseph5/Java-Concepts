@@ -1,5 +1,6 @@
 package com.naveenautomation.Test;
 
+import org.junit.Ignore;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -23,7 +24,7 @@ public class RegisterAccountTest extends TestBase {
 		yourStorePage = new YourStorePage();
 
 	}
-
+	
 	@Test(dataProvider = "SignUpData")
 	public void registerAccountTest(String firstName, String lastName, String emailID, String phonrNumber,
 			String password, String confirmPassword) {

@@ -14,7 +14,7 @@ public class YourStorePage extends TestBase {
 		PageFactory.initElements(webDriver, this);
 	}
 
-	@FindBy(css = "#top-links ul li:nth-of-type(2) span:first-of-type")
+	@FindBy(css = "[title='My Account']")
 	private WebElement myAccountBtn;
 
 	@FindBy(css = "#top-links ul.dropdown-menu li:last-of-type")
@@ -26,8 +26,8 @@ public class YourStorePage extends TestBase {
 	@FindBy(css = "#content div.row>div:first-of-type button:first-of-type")
 	private WebElement macbookAddToCartBtn;
 
-	@FindBy(css = "#content div.row>div:nth-of-type(2) button:first-of-type")
-	private WebElement iphoneAddToCartBtn;
+//	@FindBy(css = "#content div.row>div:nth-of-type(2) button:first-of-type")
+//	private WebElement iphoneAddToCartBtn;
 
 	@FindBy(css = "#top-links > ul > li:nth-of-type(5) > a")
 	private WebElement checkOutBtn;
@@ -50,12 +50,12 @@ public class YourStorePage extends TestBase {
 		Utils.click(macbookAddToCartBtn);
 	}
 
-	public void clickOnIphoneAddToCartBtn() {
-		Utils.click(iphoneAddToCartBtn);
-	}
+//	public void clickOnIphoneAddToCartBtn() {
+//		Utils.click(iphoneAddToCartBtn);
+//	}
 
 	public CheckoutPage clickOnCheckOutBtn() {
-		clickOnIphoneAddToCartBtn();
+//		clickOnIphoneAddToCartBtn();
 		clickOnMacbookAddToCartBtn();
 		Utils.click(checkOutBtn);
 		return new CheckoutPage();

@@ -25,7 +25,7 @@ public class AccountLoginTest extends TestBase {
 	public void verifyCustomerLogin() {
 		yourStorePage.clickMyAccountBtn();
 		accountLogin = yourStorePage.clickloginBtn();
-		MyAccountPage myAccountPage = accountLogin.login("user11@gmail.com", "Qwerty123");
+		MyAccountPage myAccountPage = accountLogin.login("user16@gmail.com", "Qwerty123");
 		Assert.assertEquals(myAccountPage.getTextFromMyAccount(), "My Account", "Title doesnot Match");
 	}
 
