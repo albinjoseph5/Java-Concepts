@@ -26,15 +26,15 @@ public class YourOrderHasBeenPlacedTest extends TestBase {
 		yourStorePage = new YourStorePage();
 
 	}
-
-	@Test()@Ignore
+	@Ignore
+	@Test()
 	public void verifyCheckout() {
 		yourStorePage.clickMyAccountBtn();
 		accountLogin = yourStorePage.clickloginBtn();
 		myAccountPage = accountLogin.login("user13@gmail.com", "Qwerty123");
 		yourStorePage = myAccountPage.clickHomeBtn();
 		checkout = yourStorePage.clickOnCheckOutBtn();
-		YourOrderHasBeenPlacedPage orderPlaced = checkout.clickOnConfirmBtn();
+//		YourOrderHasBeenPlacedPage orderPlaced = checkout.clickOnConfirmBtn();
 //		Assert.assertEquals(orderPlaced.successMessageDisplayed(), "Your Account Has Been Created!",
 //				"Success message doesnot match");
 	}

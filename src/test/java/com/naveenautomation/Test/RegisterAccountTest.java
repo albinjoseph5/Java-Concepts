@@ -24,7 +24,7 @@ public class RegisterAccountTest extends TestBase {
 		yourStorePage = new YourStorePage();
 
 	}
-	
+	@Ignore
 	@Test(dataProvider = "SignUpData")
 	public void registerAccountTest(String firstName, String lastName, String emailID, String phonrNumber,
 			String password, String confirmPassword) {
